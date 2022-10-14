@@ -97,12 +97,12 @@ def todasProteinas (seqAA):
     return proteinas
 
 def todasProteinasORFs (seqDNA):
-    porfs = orfs(seqDNA)
+    porfs = orfs(seqDNA) # lista de listas
     res = []
-    for orf in porfs:
-        prots = todasProteinas(orf)
-        for p in prots: res.append(p)
-    return res
+    for orf in porfs: # a cada lista 
+        prots = todasProteinas(orf) # vamos traduzir cada lista em proteínas
+        for p in prots: res.append(p) # Vamos tirar todas as proteínas na forma de uma lista
+    return res  # É uma lista
 
 
 
@@ -180,9 +180,46 @@ def aminoacidos(dna):
     return dic
     
 
+# Exercício 4
 
-    
+def stop_check(dna):
+    codoes = traduzSeq(dna,0)
+    return(codoes.find('_'))
+
+# Exercício 5
+
+def all_stop(dna):
+    codoes = traduzSeq(dna,0)
+    pos = []
+    i = 0
+    while i< len(codoes):
+        if codoes[i] == '_':
+            pos.append(i)
+        i +=1
+    return pos
+   
+#Exercício 6
+
+def a_maior_p(amino): 
+    j=0
+    i=0
+    enc = False
+    while j< len(amino) and not enc:
+        if amino[j] == '_':
+            enc = j
+        j+=1
+    fim =[]
+    while i < len(amino):
+        if amino[i] =='_':
+            fim.append(i)
+        i+=1
+    return(amino[j:max(fim)],enc,fim)
 
 
-    
+#Exercício 7
+
+def ret_prt(dna):
+    proteinas =[]
+    pR = todasProteinasORFs(dna)  # lista com todas as proteínas possíveis
+    return(sorted(lista_prot, key = len))
 
